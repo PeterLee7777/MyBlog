@@ -81,7 +81,6 @@ package com.lwy.blog.common.aop;
 
 
 
-//import eu.bitwalker.useragentutils.UserAgent;
 import eu.bitwalker.useragentutils.UserAgent;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
@@ -95,11 +94,11 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 
 /**
- * @description： 日志切面 打印请求日志
- * @author： wk
- * @create： 2022-03-17 20:14
+ * 日志切面 打印请求日志
+ * @author 李文阳
  */
 @Slf4j   // lombok中日志注解
+
 @Aspect  // 表明是一个切面类
 @Component
 public class LogAspect {
@@ -108,10 +107,6 @@ public class LogAspect {
      * 进入方法时间戳
      */
     private Long startTime;
-    /**
-     * 方法结束时间戳(计时)
-     */
-    private Long endTime;
 
     public LogAspect() {
     }
@@ -125,13 +120,15 @@ public class LogAspect {
 
     /**
      * 前置通知，方法之前执行
-     * @param joinPoint
+     * @param joinPoint 切入点
      */
     @Before(POINTCUT)
     public void doBefore(JoinPoint joinPoint) {
         // 获取当前的HttpServletRequest对象
         ServletRequestAttributes attributes =
                 (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        //空指针
+        assert attributes != null;
         HttpServletRequest request = attributes.getRequest();
         // 获取请求头中的User-Agent
         UserAgent userAgent = UserAgent.parseUserAgentString(request.getHeader("User-Agent"));
@@ -165,7 +162,10 @@ public class LogAspect {
      */
     @AfterReturning(returning = "ret", pointcut = POINTCUT)
     public void doAfterReturning(Object ret) {
-        endTime = System.currentTimeMillis();
+        /**
+         * 方法结束时间戳(计时)
+         */
+        Long endTime = System.currentTimeMillis();
         log.info("请求结束时间 : {}", LocalDateTime.now());
         log.info("请求耗时 : {}", (endTime - startTime));
         // 处理完请求，返回内容

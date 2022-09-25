@@ -15,9 +15,11 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
 import java.time.Duration;
 
+/**
+ * @author 李文阳
+ */
 @Component
 @Aspect
 @Slf4j
@@ -37,7 +39,6 @@ public class CacheAspect {
             String className = pjp.getTarget().getClass().getSimpleName();
             //调用的方法名
             String methodName = signature.getName();
-
 
             Class[] parameterTypes = new Class[pjp.getArgs().length];
             Object[] args = pjp.getArgs();

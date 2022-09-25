@@ -3,6 +3,9 @@ package com.lwy.blog.common.cache;
 
 import java.lang.annotation.*;
 
+/**
+ * @author 李文阳
+ */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
