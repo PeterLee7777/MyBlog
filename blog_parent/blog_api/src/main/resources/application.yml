@@ -1,0 +1,38 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: myblog
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/blog?useUnicode=true&characterEncoding=UTF-8&serverTimeZone=UTC
+    username: root
+    password: root1234
+  redis:
+    port: 6379
+    host: linux
+  servlet:
+    multipart:
+      # 上传文件总的最大值
+      max-request-size: 20MB
+      # 单个文件的最大值
+      max-file-size: 2MB
+
+
+mybatis-plus:
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      table-prefix: t_
+
+qiniu:
+  accessKey: 7_Lrhms1qhRwcBw9xIRGXN-5dW96t5TuFOv3-02L
+  accessSecretKey: VjbsOT2gzyJlxm4WoAkihmxbcztepQSuARk3oGY9
+
+
+rocketmq:
+  name-server: linux:9876
+  producer:
+    group: blog_group

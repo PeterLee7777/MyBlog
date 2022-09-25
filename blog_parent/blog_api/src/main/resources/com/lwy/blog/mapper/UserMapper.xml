@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lwy.blog.mapper.UserMapper">
+    <!--SysUser findUserById01(Long id);-->
+    <select id="findUserById01" parameterType="long" resultType="com.lwy.blog.entity.pojo.SysUser">
+        select * from t_sys_user where id = #{id}
+    </select>
+
+    <!--SysUser selectOneByAccount(String account);-->
+    <select id="selectOneByAccount" parameterType="string" resultType="com.lwy.blog.entity.pojo.SysUser">
+        select * from t_sys_user where account = #{account}
+    </select>
+</mapper>
